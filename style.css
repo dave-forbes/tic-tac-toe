@@ -1,5 +1,6 @@
 :root {
   --border-color: rgb(57, 57, 57);
+  --background-color: rgb(217, 217, 217);
   color: var(--border-color);
 }
 
@@ -8,6 +9,7 @@ body {
   height: 100vh;
   display: grid;
   place-content: center;
+  background-color: var(--background-color);
 }
 
 #game-grid {
