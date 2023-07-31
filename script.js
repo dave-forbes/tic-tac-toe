@@ -17,8 +17,11 @@ function displayBoard() {
 
 function switchActivePlayer() {
   activePlayer = activePlayer == 'X' ? 'O' : 'X';
-  console.log(`${activePlayer} turn`);
-}
+  const h1 = document.querySelector('h1');
+  h1.textContent = `${activePlayer} turn`;
+};
+
+switchActivePlayer();
 
 const cells = document.querySelectorAll('div.game-cell');
 
@@ -27,7 +30,7 @@ cells.forEach(div => div.addEventListener('click', () => {
   console.log(cellIndex);
   console.log(activePlayer);
   gameBoard[cellIndex - 1] = activePlayer;
-  console.log(gameBoard);
+  console.table(gameBoard);
   switchActivePlayer();
   displayBoard();
 }))
