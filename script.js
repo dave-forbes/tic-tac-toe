@@ -15,19 +15,14 @@ function switchActivePlayer() {
   activePlayer = activePlayer == 'X' ? 'O' : 'X';
   const h1 = document.querySelector('h1');
   player = activePlayer == 'X' ? 'Crosses' : 'Noughts'
-  h1.textContent = `${player}' turn`;
+  h1.textContent = `${player}' turn...`;
 };
-
-switchActivePlayer();
 
 const cells = document.querySelectorAll('.game-cell');
 
 cells.forEach(button => button.addEventListener('click', () => {
   const cellIndex = button.getAttribute('id').slice(5);
-  console.log(cellIndex);
-  console.log(activePlayer);
   gameBoard[cellIndex - 1] = activePlayer;
-  console.table(gameBoard);
   switchActivePlayer();
   displayBoard();
   checkWinner();
@@ -58,6 +53,11 @@ function checkWinner() {
   } else if (gameBoard[2] == gameBoard[4] && gameBoard[4] == gameBoard[6] && gameBoard[2] !== "") {
     displayWinner();
     document.querySelector('#diagonal-2').style.display = 'block';
+  } else if (gameBoard.every(cell => cell !== '')) {
+    const h1 = document.querySelector('h1');
+    h1.textContent = `It's a tie!`;
+    const cells = document.querySelectorAll('button.game-cell');
+    cells.forEach(cell => cell.disabled = true);
   }
 }
 
