@@ -1,5 +1,5 @@
 :root {
-  --border-color: rgb(57, 57, 57);
+  --border-color: rgb(27, 27, 27);
   --background-color: rgb(233, 231, 231);
   color: var(--border-color);
   font-family: 'Roboto', sans-serif;
@@ -12,13 +12,14 @@ body {
   display: grid;
   place-content: center;
   background-color: var(--background-color);
+  margin: 0;
 }
 
 #game-grid {
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-  width: 500px;
-  height: 500px;
+  width: 40vh;
+  height: 40vh;
   border: 2px solid var(--border-color);
   margin: 0 auto;
 }
@@ -38,77 +39,19 @@ body {
 button {
   border: none;
   background-color: white;
-  font-size: 80px;
+  font-size: 3rem;
 }
 
 h1 {
   text-align: center;
-  font-size: 4rem;
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2rem;
   font-weight: 400;
-}
-
-#top-row {
-  top: 11%;
-  left: 10%;
-  display: none;
-}
-
-#middle-row {
-  top: 35%;
-  left: 10%;
-  display: none;
-}
-
-#bottom-row {
-  top: 59%;
-  left: 10%;
-  display: none;
-}
-
-#left-column {
-  top: 35%;
-  right: 43%;
-  transform: rotate(90deg);
-  display: none;
-}
-
-#middle-column {
-  top: 35%;
-  right: 10%;
-  transform: rotate(90deg);
-  display: none;
-}
-
-#right-column {
-  top: 35%;
-  right: -24%;
-  transform: rotate(90deg);
-  display: none;
-}
-
-#diagonal-1 {
-  top: 35%;
-  right: 0;
-  transform: rotate(45deg);
-  width: 500px;
-  display: none;
-}
-
-#diagonal-2 {
-  top: 35%;
-  right: 0;
-  transform: rotate(-45deg);
-  width: 500px;
-  display: none;
-}
-
-
-.line {
-  position: absolute;
-  width: 400px;
-  height: 10px;
-  background-color: red;
-  border-radius: 20px;
 }
 
 #main-content {
@@ -128,4 +71,23 @@ h1 {
 #start-again-button:focus {
   background-color: var(--border-color);
   color: white;
+}
+
+@media (min-width: 1000px) {
+  button {
+    font-size: 4.5rem;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+  }
+
+  body {
+    gap: 2rem
+  }
 }
