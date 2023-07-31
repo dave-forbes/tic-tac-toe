@@ -2,6 +2,8 @@
   --border-color: rgb(57, 57, 57);
   --background-color: rgb(233, 231, 231);
   color: var(--border-color);
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
 }
 
 body {
@@ -18,12 +20,19 @@ body {
   width: 500px;
   height: 500px;
   border: 2px solid var(--border-color);
+  margin: 0 auto;
 }
 
 .game-cell {
   border: 2px solid var(--border-color);
   display: grid;
   place-content: center;
+  transition: background-color 0.4s ease;
+}
+
+.game-cell:hover,
+.game-cell:focus {
+  background-color: rgb(243, 241, 241);
 }
 
 button {
@@ -34,7 +43,8 @@ button {
 
 h1 {
   text-align: center;
-  font-size: 80px;
+  font-size: 4rem;
+  font-weight: 400;
 }
 
 #top-row {
@@ -114,7 +124,8 @@ h1 {
   transition: background-color 0.4s ease;
 }
 
-#start-again-button:hover {
+#start-again-button:hover,
+#start-again-button:focus {
   background-color: var(--border-color);
   color: white;
 }
