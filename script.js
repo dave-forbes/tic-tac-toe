@@ -3,7 +3,7 @@ let activePlayer = 'X';
 
 
 function displayBoard() {
-  const cells = document.querySelectorAll('div.game-cell');
+  const cells = document.querySelectorAll('.game-cell');
   cells.forEach(cell => cell.innerHTML = '');
   gameBoard.forEach((item, index) => {
     const cell = document.querySelector(`#cell-${index + 1}`);
@@ -13,52 +13,58 @@ function displayBoard() {
 
 function switchActivePlayer() {
   activePlayer = activePlayer == 'X' ? 'O' : 'X';
-  const h1 = document.querySelector('h1');
+  const h1 = document.querySelector('h2');
   player = activePlayer == 'X' ? 'Crosses' : 'Noughts'
   h1.textContent = `${player}' turn...`;
 };
 
-(function () {
-  const cells = document.querySelectorAll('.game-cell');
-  cells.forEach(button => button.addEventListener('click', () => {
-    const cellIndex = button.getAttribute('id').slice(5);
-    if (gameBoard[cellIndex - 1] !== '') return;
-    gameBoard[cellIndex - 1] = activePlayer;
-    switchActivePlayer();
-    displayBoard();
-    checkWinner();
-  }))
+(function selectCell() {
+  document.querySelector('#game-grid').addEventListener('click', click);
+
+  function click(e) {
+    const buttonId = e.target.getAttribute('id').slice(5);
+    makePlayerChoice(buttonId);
+  }
 })();
+
+function makePlayerChoice(cellIndex) {
+  if (gameBoard[cellIndex - 1] !== '') return;
+  gameBoard[cellIndex - 1] = activePlayer;
+  switchActivePlayer();
+  displayBoard();
+  checkWinner();
+}
 
 
 function checkWinner() {
   if (gameBoard[0] == gameBoard[1] && gameBoard[1] == gameBoard[2] && gameBoard[0] !== "") {
-    displayWinner('#top-row');
+    displayWinner('.top-row');
   } else if (gameBoard[3] == gameBoard[4] && gameBoard[4] == gameBoard[5] && gameBoard[3] !== "") {
-    displayWinner('#middle-row');
+    displayWinner('.middle-row');
   } else if (gameBoard[6] == gameBoard[7] && gameBoard[7] == gameBoard[8] && gameBoard[6] !== "") {
-    displayWinner('#bottom-row');
+    displayWinner('.bottom-row');
   } else if (gameBoard[0] == gameBoard[3] && gameBoard[3] == gameBoard[6] && gameBoard[0] !== "") {
-    displayWinner('#left-column');
+    displayWinner('.left-column');
   } else if (gameBoard[1] == gameBoard[4] && gameBoard[4] == gameBoard[7] && gameBoard[1] !== "") {
-    displayWinner('#middle-column');
+    displayWinner('.middle-column');
   } else if (gameBoard[2] == gameBoard[5] && gameBoard[5] == gameBoard[8] && gameBoard[2] !== "") {
-    displayWinner('#right-column');
+    displayWinner('.right-column');
   } else if (gameBoard[0] == gameBoard[4] && gameBoard[4] == gameBoard[8] && gameBoard[0] !== "") {
-    displayWinner('#diagonal-1');
+    displayWinner('.diagonal-1');
   } else if (gameBoard[2] == gameBoard[4] && gameBoard[4] == gameBoard[6] && gameBoard[2] !== "") {
-    displayWinner('#diagonal-2');
+    displayWinner('.diagonal-2');
   } else if (gameBoard.every(cell => cell !== '')) {
-    const h1 = document.querySelector('h1');
+    const h1 = document.querySelector('h2');
     h1.textContent = `It's a tie!`;
     disableButtons();
   }
 }
 
-function displayWinner(id) {
-  document.querySelector(id).style.display = 'block';
+function displayWinner(buttonClass) {
+  const buttons = document.querySelectorAll(`button${buttonClass}`);
+  buttons.forEach(button => button.style.backgroundColor = 'rgb(240, 97, 97)');
   switchActivePlayer();
-  const h1 = document.querySelector('h1');
+  const h1 = document.querySelector('h2');
   winner = activePlayer == 'X' ? 'Crosses' : 'Noughts'
   h1.textContent = `${winner} win!`;
   disableButtons();
@@ -69,5 +75,8 @@ function disableButtons() {
   cells.forEach(cell => cell.disabled = true);
 }
 
-const startAgain = document.querySelector('#start-again-button');
-startAgain.addEventListener('click', () => location.reload());
+(function startAgain() {
+  const startAgainButton = document.querySelector('#start-again-button');
+  startAgainButton.addEventListener('click', () => location.reload())
+})();
+
