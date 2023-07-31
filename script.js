@@ -1,5 +1,3 @@
-const playerOne = 'X';
-const playerTwo = 'O';
 let gameBoard = ['', '', '', '', '', '', '', '', ''];
 let activePlayer = 'X';
 
@@ -16,7 +14,8 @@ function displayBoard() {
 function switchActivePlayer() {
   activePlayer = activePlayer == 'X' ? 'O' : 'X';
   const h1 = document.querySelector('h1');
-  h1.textContent = `${activePlayer} turn`;
+  player = activePlayer == 'X' ? 'Crosses' : 'Noughts'
+  h1.textContent = `${player}' turn`;
 };
 
 switchActivePlayer();
@@ -65,7 +64,8 @@ function checkWinner() {
 function displayWinner() {
   switchActivePlayer();
   const h1 = document.querySelector('h1');
-  h1.textContent = `${activePlayer} won`;
+  winner = activePlayer == 'X' ? 'Crosses' : 'Noughts'
+  h1.textContent = `${winner} won!`;
   const cells = document.querySelectorAll('button.game-cell');
   cells.forEach(cell => cell.disabled = true);
 }
