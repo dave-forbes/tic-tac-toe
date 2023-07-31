@@ -1,6 +1,6 @@
 :root {
   --border-color: rgb(57, 57, 57);
-  --background-color: rgb(217, 217, 217);
+  --background-color: rgb(233, 231, 231);
   color: var(--border-color);
 }
 
@@ -111,6 +111,7 @@ h1 {
   padding: 10px;
   width: 200px;
   margin: 0 auto;
+  transition: background-color 0.4s ease;
 }
 
 #start-again-button:hover {
