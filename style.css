@@ -18,10 +18,8 @@ body {
   place-content: center;
 }
 
-.game-cell button {
-  width: 90%;
-  height: 90%;
-  font-size: 80px;
+button {
   border: none;
   background-color: white;
+  font-size: 80px;
 }
