@@ -1,0 +1,27 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+#game-grid {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  width: 500px;
+  height: 500px;
+}
+
+.game-cell {
+  border: 1px solid black;
+  display: grid;
+  place-content: center;
+}
+
+.game-cell button {
+  width: 90%;
+  height: 90%;
+  font-size: 80px;
+  border: none;
+  background-color: white;
+}
