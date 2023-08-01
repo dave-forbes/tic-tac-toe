@@ -13,9 +13,9 @@ function displayBoard() {
 
 function switchActivePlayer() {
   activePlayer = activePlayer == 'X' ? 'O' : 'X';
-  const h1 = document.querySelector('h2');
+  const h2 = document.querySelector('h2');
   player = activePlayer == 'X' ? 'Crosses' : 'Noughts'
-  h1.textContent = `${player}' turn...`;
+  h2.textContent = `${player}' turn...`;
 };
 
 (function selectCell() {
@@ -54,19 +54,19 @@ function checkWinner() {
   } else if (gameBoard[2] == gameBoard[4] && gameBoard[4] == gameBoard[6] && gameBoard[2] !== "") {
     displayWinner('.diagonal-2');
   } else if (gameBoard.every(cell => cell !== '')) {
-    const h1 = document.querySelector('h2');
-    h1.textContent = `It's a tie!`;
+    const h2 = document.querySelector('h2');
+    h2.textContent = `It's a tie!`;
     disableButtons();
   }
 }
 
 function displayWinner(buttonClass) {
   const buttons = document.querySelectorAll(`button${buttonClass}`);
-  buttons.forEach(button => button.style.backgroundColor = 'rgb(240, 97, 97)');
+  buttons.forEach(button => button.style.backgroundColor = 'rgb(238, 126, 126)');
   switchActivePlayer();
-  const h1 = document.querySelector('h2');
+  const h2 = document.querySelector('h2');
   winner = activePlayer == 'X' ? 'Crosses' : 'Noughts'
-  h1.textContent = `${winner} win!`;
+  h2.textContent = `${winner} win!`;
   disableButtons();
 }
 
