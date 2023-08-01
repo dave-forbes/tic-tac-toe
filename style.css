@@ -34,7 +34,7 @@ body {
 
 .game-cell:hover,
 .game-cell:focus {
-  background-color: rgb(243, 241, 241);
+  background-color: var(--background-color);
 }
 
 button {
