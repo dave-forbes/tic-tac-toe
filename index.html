@@ -31,8 +31,21 @@
         </div>
     </div>
     <h2>Crosses turn...</h2>
-    <button id="start-again-button">Start Again?</button>
+    <button id="start-again-button" class="ui-button">Start Again?</button>
 
+    <form action="">
+        <label for="player1">Player 1 name?</label>
+        <input id="player1" type="text">
+        <label for="player2">Player 2 name?</label>
+        <input id="player2" type="text">
+        <p>AI Opponent?</p>
+        <div>
+            <label for="yes">Yes</label><input name="ai" id="yes" type="radio">
+            <label for="no">No</label><input name="ai" id="no" type="radio">
+        </div>
+
+        <button id="start-game-button" class="ui-button" type="button">Start Game</button>
+    </form>
 
 </body>
 
