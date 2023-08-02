@@ -125,6 +125,11 @@ p {
   margin: 0;
 }
 
+p#error {
+  color: var(--accent-color);
+  display: none;
+}
+
 form>div {
   display: flex;
   gap: 1rem;
@@ -145,6 +150,7 @@ input[type="radio"]:checked {
   background-color: var(--accent-color);
 }
 
-#start-game-button {
+#start-game-button,
+#error {
   grid-column: 1/3;
 }
