@@ -2,7 +2,7 @@ let playerOne;
 let playerTwo;
 const game = GameController();
 
-(function StartGame() {
+(function startGame() {
   const startGameButton = document.querySelector('#start-game-button');
   const form = document.querySelector('form');
   const gameGrid = document.querySelector('#game-grid');
