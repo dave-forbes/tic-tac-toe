@@ -1,5 +1,6 @@
 let playerOne;
 let playerTwo;
+const game = GameController();
 
 (function StartGame() {
   const startGameButton = document.querySelector('#start-game-button');
@@ -93,13 +94,13 @@ function GameController() {
     cells.forEach(cell => cell.disabled = true);
   }
 
-  return { makePlayerChoice };
+  const reload = () => { location.reload() };
+
+  return { makePlayerChoice, reload };
 }
 
 
 (function selectCell() {
-  const game = GameController();
-
   document.querySelector('#game-grid').addEventListener('click', click);
   function click(e) {
     const buttonId = e.target.getAttribute('id').slice(5);
@@ -109,7 +110,7 @@ function GameController() {
 
 (function startAgain() {
   const startAgainButton = document.querySelector('#start-again-button');
-  startAgainButton.addEventListener('click', () => location.reload())
+  startAgainButton.addEventListener('click', () => { game.reload() })
 })();
 
 
