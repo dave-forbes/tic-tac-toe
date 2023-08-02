@@ -79,14 +79,11 @@ function GameController() {
     } else {
       choice = Math.floor(Math.random() * 9);
     }
-    console.log(choice);
     if (gameBoard[choice] !== '') { choice = gameBoard.findLastIndex(item => item == ''); }
     gameBoard[choice] = 'O';
     switchActivePlayer();
     displayBoard();
     checkWinner();
-    console.log(gameBoard);
-    console.log(activePlayer);
   }
 
   const switchActivePlayer = () => {
