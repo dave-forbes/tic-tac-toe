@@ -1,5 +1,6 @@
 let playerOne;
 let playerTwo;
+let Ai;
 const game = GameController();
 
 (function startGame() {
@@ -15,6 +16,10 @@ const game = GameController();
       document.querySelector('#error').style.display = 'none';
       playerOne = document.querySelector('#player1').value;
       playerTwo = document.querySelector('#player2').value;
+      if (document.querySelector('#yes').checked == true) {
+        Ai = true;
+        playerTwo = 'AI' + playerTwo;
+      }
       h2.textContent = `${playerOne}'s turn...`;
       form.style.display = 'none';
       gameGrid.style.display = 'grid'
@@ -28,6 +33,7 @@ function GameController() {
 
   let gameBoard = ['', '', '', '', '', '', '', '', ''];
   let activePlayer = 'X';
+  let endGame = false;
 
   const displayBoard = () => {
     const cells = document.querySelectorAll('.game-cell');
@@ -44,6 +50,43 @@ function GameController() {
     switchActivePlayer();
     displayBoard();
     checkWinner();
+    if (endGame == true) return;
+    if (Ai == true) {
+      makeAiChoice();
+    }
+  }
+
+  const makeAiChoice = () => {
+    let choice;
+    if (gameBoard[1] == gameBoard[2] && gameBoard[1] == 'X' || gameBoard[3] == gameBoard[6] && gameBoard[3] == 'X' || gameBoard[4] == gameBoard[8] && gameBoard[4] == 'X') {
+      choice = 0;
+    } else if (gameBoard[0] == gameBoard[2] && gameBoard[0] == 'X' || gameBoard[4] == gameBoard[7] && gameBoard[4] == 'X') {
+      choice = 1;
+    } else if (gameBoard[0] == gameBoard[1] && gameBoard[0] == 'X' || gameBoard[8] == gameBoard[5] && gameBoard[8] == 'X' || gameBoard[6] == gameBoard[4] && gameBoard[6] == 'X') {
+      choice = 2;
+    } else if (gameBoard[0] == gameBoard[6] && gameBoard[0] == 'X' || gameBoard[4] == gameBoard[5] && gameBoard[4] == 'X') {
+      choice = 3;
+    } else if (gameBoard[0] == gameBoard[8] && gameBoard[0] == 'X' || gameBoard[2] == gameBoard[6] && gameBoard[2] == 'X' || gameBoard[1] == gameBoard[7] && gameBoard[1] == 'X' || gameBoard[3] == gameBoard[5] && gameBoard[3] == 'X') {
+      choice = 4;
+    } else if (gameBoard[2] == gameBoard[8] && gameBoard[2] == 'X' || gameBoard[3] == gameBoard[4] && gameBoard[3] == 'X') {
+      choice = 5;
+    } else if (gameBoard[0] == gameBoard[3] && gameBoard[0] == 'X' || gameBoard[7] == gameBoard[8] && gameBoard[7] == 'X' || gameBoard[2] == gameBoard[4] && gameBoard[2] == 'X') {
+      choice = 6;
+    } else if (gameBoard[6] == gameBoard[8] && gameBoard[6] == 'X' || gameBoard[1] == gameBoard[4] && gameBoard[1] == 'X') {
+      choice = 7;
+    } else if (gameBoard[6] == gameBoard[7] && gameBoard[6] == 'X' || gameBoard[2] == gameBoard[5] && gameBoard[2] == 'X' || gameBoard[0] == gameBoard[4] && gameBoard[0] == 'X') {
+      choice = 8;
+    } else {
+      choice = Math.floor(Math.random() * 9);
+    }
+    console.log(choice);
+    if (gameBoard[choice] !== '') { choice = gameBoard.findIndex(item => item == ''); }
+    gameBoard[choice] = 'O';
+    switchActivePlayer();
+    displayBoard();
+    checkWinner();
+    console.log(gameBoard);
+    console.log(activePlayer);
   }
 
   const switchActivePlayer = () => {
@@ -54,26 +97,30 @@ function GameController() {
   };
 
   const checkWinner = () => {
-    if (gameBoard[0] == gameBoard[1] && gameBoard[1] == gameBoard[2] && gameBoard[0] !== "") {
+    if (gameBoard.every(cell => cell == '')) return;
+    if (gameBoard[0] == gameBoard[1] && gameBoard[1] == gameBoard[2] && gameBoard[0]) {
       displayWinner('.top-row');
-    } else if (gameBoard[3] == gameBoard[4] && gameBoard[4] == gameBoard[5] && gameBoard[3] !== "") {
+    } else if (gameBoard[3] == gameBoard[4] && gameBoard[4] == gameBoard[5] && gameBoard[3]) {
       displayWinner('.middle-row');
-    } else if (gameBoard[6] == gameBoard[7] && gameBoard[7] == gameBoard[8] && gameBoard[6] !== "") {
+    } else if (gameBoard[6] == gameBoard[7] && gameBoard[7] == gameBoard[8] && gameBoard[6]) {
       displayWinner('.bottom-row');
-    } else if (gameBoard[0] == gameBoard[3] && gameBoard[3] == gameBoard[6] && gameBoard[0] !== "") {
+    } else if (gameBoard[0] == gameBoard[3] && gameBoard[3] == gameBoard[6] && gameBoard[0]) {
       displayWinner('.left-column');
-    } else if (gameBoard[1] == gameBoard[4] && gameBoard[4] == gameBoard[7] && gameBoard[1] !== "") {
+    } else if (gameBoard[1] == gameBoard[4] && gameBoard[4] == gameBoard[7] && gameBoard[1]) {
       displayWinner('.middle-column');
-    } else if (gameBoard[2] == gameBoard[5] && gameBoard[5] == gameBoard[8] && gameBoard[2] !== "") {
+    } else if (gameBoard[2] == gameBoard[5] && gameBoard[5] == gameBoard[8] && gameBoard[2]) {
       displayWinner('.right-column');
-    } else if (gameBoard[0] == gameBoard[4] && gameBoard[4] == gameBoard[8] && gameBoard[0] !== "") {
+    } else if (gameBoard[0] == gameBoard[4] && gameBoard[4] == gameBoard[8] && gameBoard[0]) {
       displayWinner('.diagonal-1');
-    } else if (gameBoard[2] == gameBoard[4] && gameBoard[4] == gameBoard[6] && gameBoard[2] !== "") {
+    } else if (gameBoard[2] == gameBoard[4] && gameBoard[4] == gameBoard[6] && gameBoard[2]) {
       displayWinner('.diagonal-2');
     } else if (gameBoard.every(cell => cell !== '')) {
       const h2 = document.querySelector('h2');
+      const startAgain = document.querySelector('#start-again-button');
       h2.textContent = `It's a tie!`;
+      startAgain.classList.add('red');
       disableButtons();
+      endGame = true;
     }
   }
 
@@ -87,6 +134,7 @@ function GameController() {
     winner = activePlayer == 'X' ? `${playerOne}` : `${playerTwo}`;
     h2.textContent = `${winner} wins!`;
     disableButtons();
+    endGame = true;
   }
 
   const disableButtons = () => {
