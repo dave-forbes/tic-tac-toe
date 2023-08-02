@@ -1,7 +1,8 @@
 :root {
   --border-color: rgb(27, 27, 27);
-  --background-color: rgb(233, 231, 231);
+  --background-color: rgb(243, 251, 239);
   --accent-color: rgb(238, 126, 126);
+  --hover-color: rgb(197, 254, 227);
   color: var(--border-color);
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
@@ -26,6 +27,7 @@ h1 {
   text-align: center;
   font-size: 3rem;
   font-weight: 400;
+  font-family: 'Victor Mono', monospace;
 }
 
 h2 {
@@ -41,7 +43,7 @@ h2 {
   }
 
   h1 {
-    font-size: 4rem;
+    font-size: 5rem;
   }
 
   h2 {
@@ -73,7 +75,7 @@ h2 {
 
 .game-cell:hover,
 .game-cell:focus {
-  background-color: var(--background-color);
+  background-color: var(--hover-color);
 }
 
 .ui-button {
