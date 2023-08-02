@@ -18,7 +18,7 @@ const game = GameController();
       playerTwo = document.querySelector('#player2').value;
       if (document.querySelector('#yes').checked == true) {
         Ai = true;
-        playerTwo = 'AI' + playerTwo;
+        playerTwo = 'AI ' + playerTwo;
       }
       h2.textContent = `${playerOne}'s turn...`;
       form.style.display = 'none';
@@ -80,7 +80,7 @@ function GameController() {
       choice = Math.floor(Math.random() * 9);
     }
     console.log(choice);
-    if (gameBoard[choice] !== '') { choice = gameBoard.findIndex(item => item == ''); }
+    if (gameBoard[choice] !== '') { choice = gameBoard.findLastIndex(item => item == ''); }
     gameBoard[choice] = 'O';
     switchActivePlayer();
     displayBoard();
