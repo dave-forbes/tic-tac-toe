@@ -1,28 +1,29 @@
-function startGame() {
+let playerOne;
+let playerTwo;
+
+(function StartGame() {
   const startGameButton = document.querySelector('#start-game-button');
   const form = document.querySelector('form');
   const gameGrid = document.querySelector('#game-grid');
   const h2 = document.querySelector('h2');
   const startAgainButton = document.querySelector('#start-again-button');
-  let playerOne;
-  let playerTwo;
   startGameButton.addEventListener('click', () => {
-    form.style.display = 'none';
-    gameGrid.style.display = 'grid'
-    h2.style.display = 'block';
-    startAgainButton.style.display = 'block';
-    playerOne = document.querySelector('#player1').value;
-    playerTwo = document.querySelector('#player2').value;
-    h2.textContent = `${playerOne}'s turn...`;
-  })
-  return { playerOne, playerTwo }
-};
-
-startGame();
+    if (document.querySelector('#player1').value == '' || document.querySelector('#player2').value == '') {
+      return document.querySelector('#error').style.display = 'block';
+    } else {
+      document.querySelector('#error').style.display = 'none';
+      playerOne = document.querySelector('#player1').value;
+      playerTwo = document.querySelector('#player2').value;
+      h2.textContent = `${playerOne}'s turn...`;
+      form.style.display = 'none';
+      gameGrid.style.display = 'grid'
+      h2.style.display = 'block';
+      startAgainButton.style.display = 'block';
+    }
+  });
+})();
 
 function GameController() {
-
-  const { playerOne, playerTwo } = startGame();
 
   let gameBoard = ['', '', '', '', '', '', '', '', ''];
   let activePlayer = 'X';
@@ -47,8 +48,8 @@ function GameController() {
   const switchActivePlayer = () => {
     activePlayer = activePlayer == 'X' ? 'O' : 'X';
     const h2 = document.querySelector('h2');
-    player = activePlayer == 'X' ? 'Crosses' : 'Noughts'
-    h2.textContent = `${player}' turn...`;
+    player = activePlayer == 'X' ? `${playerOne}` : `${playerTwo}`;
+    h2.textContent = `${player}'s turn...`;
   };
 
   const checkWinner = () => {
@@ -82,8 +83,8 @@ function GameController() {
     startAgain.classList.add('red');
     switchActivePlayer();
     const h2 = document.querySelector('h2');
-    winner = activePlayer == 'X' ? 'Crosses' : 'Noughts'
-    h2.textContent = `${winner} win!`;
+    winner = activePlayer == 'X' ? `${playerOne}` : `${playerTwo}`;
+    h2.textContent = `${winner} wins!`;
     disableButtons();
   }
 
