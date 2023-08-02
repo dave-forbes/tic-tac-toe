@@ -1,4 +1,28 @@
+function startGame() {
+  const startGameButton = document.querySelector('#start-game-button');
+  const form = document.querySelector('form');
+  const gameGrid = document.querySelector('#game-grid');
+  const h2 = document.querySelector('h2');
+  const startAgainButton = document.querySelector('#start-again-button');
+  let playerOne;
+  let playerTwo;
+  startGameButton.addEventListener('click', () => {
+    form.style.display = 'none';
+    gameGrid.style.display = 'grid'
+    h2.style.display = 'block';
+    startAgainButton.style.display = 'block';
+    playerOne = document.querySelector('#player1').value;
+    playerTwo = document.querySelector('#player2').value;
+    h2.textContent = `${playerOne}'s turn...`;
+  })
+  return { playerOne, playerTwo }
+};
+
+startGame();
+
 function GameController() {
+
+  const { playerOne, playerTwo } = startGame();
 
   let gameBoard = ['', '', '', '', '', '', '', '', ''];
   let activePlayer = 'X';
@@ -53,9 +77,9 @@ function GameController() {
 
   const displayWinner = (buttonClass) => {
     const buttons = document.querySelectorAll(`button${buttonClass}`);
+    buttons.forEach(button => button.style.backgroundColor = 'rgb(238, 126, 126)');
     const startAgain = document.querySelector('#start-again-button');
     startAgain.classList.add('red');
-    buttons.forEach(button => button.style.backgroundColor = 'rgb(238, 126, 126)');
     switchActivePlayer();
     const h2 = document.querySelector('h2');
     winner = activePlayer == 'X' ? 'Crosses' : 'Noughts'
@@ -86,4 +110,5 @@ function GameController() {
   const startAgainButton = document.querySelector('#start-again-button');
   startAgainButton.addEventListener('click', () => location.reload())
 })();
+
 
