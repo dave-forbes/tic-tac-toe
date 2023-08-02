@@ -101,11 +101,11 @@ function GameController() {
 
 
 (function selectCell() {
-  document.querySelector('#game-grid').addEventListener('click', click);
-  function click(e) {
-    const buttonId = e.target.getAttribute('id').slice(5);
+  const gameGrid = document.querySelector('#game-grid');
+  gameGrid.addEventListener('click', (event) => {
+    const buttonId = event.target.getAttribute('id').slice(5);
     game.makePlayerChoice(buttonId);
-  }
+  });
 })();
 
 (function startAgain() {
