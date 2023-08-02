@@ -112,6 +112,22 @@ form {
   font-size: 20px;
 }
 
+form>div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+@media (max-width: 320px) {
+  form {
+    width: 300px;
+  }
+
+  form>div {
+    gap: 0.5rem;
+  }
+}
+
 input {
   border: 4px solid var(--border-color);
   padding: 10px;
@@ -128,12 +144,6 @@ p {
 p#error {
   color: var(--accent-color);
   display: none;
-}
-
-form>div {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
 }
 
 input[type="radio"] {
